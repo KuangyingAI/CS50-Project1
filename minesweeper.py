@@ -115,7 +115,7 @@ class Sentence():
         """
         if self.count == 0:
             return self.cells
-        resturn set()
+        return set()
 
     def mark_mine(self, cell):
         """
@@ -196,7 +196,7 @@ class MinesweeperAI():
             for j in range(cell[1]-1, cell[1]+2):
                 if(i,j) in self.mines:
                     countMines += 1
-                if 0 <= i < self.height and 0<= j < self.width and if (i,j) not in self.safes and (i,j) not in self.mines:
+                if 0 <= i < self.height and 0<= j < self.width and (i,j) not in self.safes and (i,j) not in self.mines:
                     undeterminedCells.append((i,j))
         
         newsentence = sentence(undeterminedCells,count-countMines)
@@ -205,7 +205,7 @@ class MinesweeperAI():
         for sentence in self.knowledge:
             if sentence.known_mines():
                 for cell in sentence.known_mines().copy():
-                    self.mark_mine(cell):
+                    self.mark_mine(cell)
                 if sentence.known_safes():
                     for cell in sentence.known_safes().copy():
                         self.mark_safe(cell)
