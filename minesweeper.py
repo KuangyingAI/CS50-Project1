@@ -198,12 +198,23 @@ class MinesweeperAI():
                     countMines += 1
                 if 0 <= i < self.height and 0<= j < self.width and if (i,j) not in self.safes and (i,j) not in self.mines:
                     undeterminedCells.append((i,j))
-                
+        
+        newsentence = sentence(undeterminedCells,count-countMines)
+        self.knowledge.append(newsentence)
 
-
-
-
-
+        for sentence in self.knowledge:
+            if sentence.known_mines():
+                for cell in sentence.known_mines().copy():
+                    self.mark_mine(cell):
+                if sentence.known_safes():
+                    for cell in sentence.known_safes().copy():
+                        self.mark_safe(cell)
+        
+        for sentence in self.knowledge:
+            if newsentence.cells.issubset(sentence.cells) and self.count>0 and newsentence.count>0 and newsentence != sentence:
+                newSutset = sentence.cells.difference(newsentence.cells)
+                newsentenceSubset = sentence(list(newSutset),sentence.count- newsentence.count)
+                self.knowledge.append(newsentenceSubset)
 
     def make_safe_move(self):
         """
