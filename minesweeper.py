@@ -120,9 +120,9 @@ class Sentence():
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
         """
-        if cell in self.cells:
+        if cell in self.cells: 
             self.cells.remove(cell)
-            cell.count -= 1
+            self.count -= 1
 
     def mark_safe(self, cell):
         """
