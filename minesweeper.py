@@ -1,7 +1,5 @@
 import itertools
 import random
-
-
 class Minesweeper():
     """
     Minesweeper game representation
@@ -199,7 +197,7 @@ class MinesweeperAI():
                 if 0 <= i < self.height and 0<= j < self.width and (i,j) not in self.safes and (i,j) not in self.mines:
                     undeterminedCells.append((i,j))
         
-        newsentence = sentence(undeterminedCells,count-countMines)
+        newsentence = Sentence(undeterminedCells,count-countMines)
         self.knowledge.append(newsentence)
 
         for sentence in self.knowledge:
@@ -211,7 +209,7 @@ class MinesweeperAI():
                         self.mark_safe(cell)
         
         for sentence in self.knowledge:
-            if newsentence.cells.issubset(sentence.cells) and self.count>0 and newsentence.count>0 and newsentence != sentence:
+            if newsentence.cells.issubset(sentence.cells) and sentence.count>0 and newsentence.count>0 and newsentence != sentence:
                 newSutset = sentence.cells.difference(newsentence.cells)
                 newsentenceSubset = sentence(list(newSutset),sentence.count- newsentence.count)
                 self.knowledge.append(newsentenceSubset)
